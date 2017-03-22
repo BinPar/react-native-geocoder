@@ -57,10 +57,15 @@ function format(raw) {
 	return address;
 }
 
-let _additionalQueryParams = '';
+let _additionalPositionQueryParams = '';
+let _additionalAddressQueryParams = '';
 
 export default {
-	addParams(params) {
+	addParams(type, params) {
+		if(!type) {
+			throw new Error("You should specify type argument");
+		}
+		
 		if (!params) {
 			throw new Error("You should specify params argument");
 		}
@@ -77,8 +82,11 @@ export default {
 		for (let i = 0, l = params.length; i < l; i++) {
 			const newParam = params[i];
 			const key = newParam.split('=').shift() + '=';
-			if (_additionalQueryParams.indexOf(key) === -1) {
-				_additionalQueryParams += `&${newParam}`;
+			if (type === 'both' || type === 'position' && _additionalPositionQueryParams.indexOf(key) === -1) {
+				_additionalPositionQueryParams += `&${newParam}`;
+			}
+			if(type === 'both' || type === 'address' && _additionalAddressQueryParams.indexOf(key) === -1) {
+				_additionalAddressQueryParams += `&${newParam}`;
 			}
 		}
 	},
@@ -88,7 +96,7 @@ export default {
 			return Promise.reject(new Error("invalid apiKey / position"));
 		}
 
-		return this.geocodeRequest(`${googleUrl}?key=${apiKey}&latlng=${position.lat},${position.lng}${_additionalQueryParams}`);
+		return this.geocodeRequest(`${googleUrl}?key=${apiKey}&latlng=${position.lat},${position.lng}${_additionalPositionQueryParams}`);
 	},
 
 	geocodeAddress(apiKey, address) {
@@ -96,7 +104,7 @@ export default {
 			return Promise.reject(new Error("invalid apiKey / address"));
 		}
 
-		return this.geocodeRequest(`${googleUrl}?key=${apiKey}&address=${encodeURI(address)}${_additionalQueryParams}`);
+		return this.geocodeRequest(`${googleUrl}?key=${apiKey}&address=${encodeURI(address)}${_additionalAddressQueryParams}`);
 	},
 
 	async geocodeRequest(url) {
