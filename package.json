@@ -1,5 +1,5 @@
 {
-  "name": "react-native-geocoder",
+  "name": "@binpar/react-native-geocoder",
   "version": "0.4.6",
   "description": "react native geocoding and reverse geocoding",
   "main": "index.js",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/devfd/react-native-geocoder"
+    "url": "https://github.com/binpar/react-native-geocoder"
   },
   "bugs": {
     "url": "https://github.com/devfd/react-native-geocoder/issues"
   },
-  "homepage": "https://github.com/devfd/react-native-geocoder",
+  "homepage": "https://github.com/binpar/react-native-geocoder",
   "license": "MIT",
   "devDependencies": {
     "appium": "^1.5.3",

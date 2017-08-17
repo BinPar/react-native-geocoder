@@ -16,7 +16,7 @@ geocoding services for react native
 
 ## Install
 ```
-npm install --save react-native-geocoder
+npm install --save @binpar/react-native-geocoder
 ```
 ## iOS
 
